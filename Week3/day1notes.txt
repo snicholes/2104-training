@@ -1,0 +1,32 @@
+Maven
+	- created by Apache
+	- project management tool + build automation tool
+	- manages the lifecycle of your application:
+		- handles dependencies (external Java libraries/frameworks that you use)
+		  such as JUnit, Hibernate, etc. using the Maven repository
+		- handles building your application with its dependencies so that
+		  it can be put on a server for people to use
+	- maven repository
+		- the Maven repository holds Java libraries and frameworks for you to use
+		- you can set up which dependencies you need and maven will handle it
+		  for you so that you don't have to go and download all of them
+	- project structure with maven:
+		- before, our Java projects just had a src/ folder where our packages went
+		- with maven, the structure is like so:
+			- src/main/java: where your packages/classes go
+			- src/main/resources: where resources like configuration files go
+			- src/test/java: where your test classes go (like JUnit tests)
+			- src/test/resources: where testing resources go
+			- pom.xml: "project object model", describes metadata such as
+			  dependencies, settings, etc. for your project
+	- pom.xml (project object model)
+		- an XML file for information about your project
+		- this is what maven uses to build your project correctly
+		- includes things like the project group id and artifact id, version, etc.
+		- you can use it to configure things like the Java version and, most
+		  importantly, dependencies that you need for your project (such as JUnit)
+	- group id: this is basically the beginning of all of your packages, e.g. com.bofa
+	- artifact id: this is the name of your project
+		- in modern-day applications, because of some of the tools used with them,
+		  the naming standard is all lowercase with hyphens between words
+			- for example, "cat-app"

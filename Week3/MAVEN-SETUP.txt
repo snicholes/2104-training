@@ -1,0 +1,30 @@
+Pre-setup:
+	1. Find the .m2 folder on your computer. It will most likely be in the following path:
+		C://Users/ZZZZZZZ/.m2
+		where the ZZZZZZZ is your standard id.
+	2. Place the provided settings.xml file in that folder.
+
+Creating projects:
+	* Note, all of your projects after this point will be Maven projects, not Java projects.
+	1. Right-click in the Project/Package Explorer or go to File.
+	2. Go to New -> Other
+	3. Search for "Maven"
+	4. Click on "Maven Project" then click Next
+	5. Check "Create a simple project (skip archetype selection)" and click Next
+	6. For "Group Id", enter "com.bofa" or "dev.yourlastname"
+	7. For "Artifact Id", enter the name of your project; for example, "bike-shop"
+	8. Click "Finish"
+
+Adding dependencies:
+	1. Find the pom.xml file in the project
+	2. Between the line with the <version> tag and the last line, put
+		<dependencies>
+		</dependencies>
+	3. In between those two tags, you can put your necessary dependencies.
+		For example, a JUnit dependency:
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.7.0-M1</version>
+			<scope>test</scope>
+		</dependency>

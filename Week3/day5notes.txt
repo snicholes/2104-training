@@ -1,0 +1,15 @@
+stream API
+	- feature of Java 8
+	- the stream API is a functional-style way of defining operations on a stream
+	  of elements
+	- streams allow you to define operations that don't modify the input data and
+	  are not executed until you tell all of them to
+	- streams do not store data, they only do work on it and return new data from
+	  that. basically they are generally used for filtering/analysis
+	- you can combine operations then execute them all together
+	- built in streams are in the java.util.stream package
+	- two types of streams
+		- intermediate operations: return a new stream and do not execute
+		  until a terminal operation is called
+		- terminal operations: trigger the execution of intermediate operations
+		  to return the final data

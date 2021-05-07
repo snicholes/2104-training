@@ -1,0 +1,67 @@
+lambdas/functional interfaces
+	- functional interfaces are interfaces that have exactly one abstract method
+		- they can have default methods, but they have to have ONE abstract one
+	- some examples that exist in Java are Runnable, Predicate, Supplier, Consumer
+	- lambdas are shorthand implementations of functional interfaces
+		- classes are meant for reusable code, but lambdas are good for
+		  "single-use" code
+	- a lambda is just a shorthand for a class that implements the one abstract
+	  method of a functional interface
+		- for example, you could have a functional interface like so:
+		  public interface MyFunctionalInterface {
+			public void myOneMethod();
+		  }
+		- if you had a class that implemented this, it would look like so:
+		  public class MyImplementationClass implements MyFunctionalInterface {
+			@Override
+			public void myOneMethod() {
+				System.out.println("does something");
+			}
+		  }
+		- and in order to use that, you'd have to do:
+			MyFunctionalInterface myImplementationObj = new MyImplementationClass();
+			myImplementationObj.myOneMethod();
+		- but if you wanted a lambda that does exactly the same thing without
+		  having to make a whole class for it, it would look like so:
+			MyFunctionalInterface myImplementationObj = () -> {
+				System.out.println("does something");
+				};
+			myImplementationObj.myOneMethod();
+	- essentially, the syntax for a lambda is one of these two:
+		FunctionalInterface varName = (parameterNames) -> valueToReturn; // shortcut if it returns something
+		FunctionalInterface varName = (parameterNames) -> {
+			// things
+			// stuff
+			return valueToReturn; // if it returns anything
+		};
+	- the benefits of lambdas:
+		- it's quicker and less code than writing a class
+	  	  just to implement one single method that you're not going to reuse anywhere
+	  	  else in your code
+		- it doesn't take up anything in the namespace (i.e. you're not making
+		  a class or method with a particular name so that name can still be used
+		  for something else if necessary)
+examples of built-in functional interfaces and how to use them
+	- Predicate<T>
+		- functional interface whose method is .test(T t)
+		- returns a boolean
+		- sort of acts like assertEquals from JUnit
+		- also includes default implementations of methods .and, .or, .negate
+		  in order to do what is called "Predicate chaining"
+			- Predicate chaining allows you to do something like:
+			  greaterThanTen.and(lessThanTwenty).test(15);
+			  where greaterThanTen is a Predicate lambda that tests whether
+			  something is greater than ten, and lessThanTwenty is likewise
+	- Supplier<T>
+		- functional interface whose method is .get()
+		- returns an object
+		- can loosely act like a factory - you can set it to return
+		  a particular type of object
+			- for example, you could have Supplier<Animal> that
+			  returns a specific subclass of Animal, but which one can
+			  be abstracted
+	- Consumer<T>
+		- functional interface whose method is .accept(T t)
+		- accepts an object, returns void
+		- used to see "side effects" of accepting an object for something or
+		  passing one somewhere.

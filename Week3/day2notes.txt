@@ -1,0 +1,85 @@
+unit testing
+	- testing is the process of checking to see whether your application's
+	  behavior is as expected
+	- unit testing is the bottom of the "testing pyramid", it's the most
+	  fundamental and plentiful type of testing because it tests individual units
+	- usually in the context of Java, "individual units" means methods
+	- for example, if i had a class that had three methods: logIn, register, and
+	  welcomeMessage, unit testing would mean writing tests for each of these
+	  methods individually
+		- possibly a test for logging in with an incorrect username, one
+		  for logging in with an incorrect password, and one for logging
+		  in correctly
+		- then a test for registering with valid username/password and one
+		  for registering with an invalid username/password
+		- then a test for printing a welcomeMessage if i was logged in,
+		  and one for printing a welcomeMessage if i'm not logged in
+test-driven development
+	- also known as TDD
+	- the process of writing your tests FIRST (before you write your code) to
+	  establish what functionality is desired for the application, THEN writing
+	  your code to pass the tests
+		- for example, i'd write a test that made sure that welcomeMessage
+		  returned the message that i wanted, THEN i'd go to the welcomeMessage
+		  method and write the code so that it would pass the test
+		- often this requires writing interfaces or having empty methods first
+		  so that your tests have the method signatures to reference when you're
+		  writing them
+	- TDD is beneficial primarily because it saves time:
+		- you already have established the desired behaviors so less changes
+		  need to occur during the development process
+		- you can write less code because you can easily find where problems
+		  arise right away while you're making them pass tests (as opposed to
+		  writing all of your code then being unsure of where a problem is
+		  coming from)
+	- TDD also makes your code more reliable:
+		- establishing behaviors first means that your methods actually have
+		  to do the right thing, whereas writing the method first then making
+		  a test to pass it won't necessarily guarantee that the method actually
+		  does what it's supposed to (instead the method might do something
+		  wrong and you're just trying to make the test pass so it ends up
+		  passing on wrong behavior)
+JUnit 5
+	- JUnit is a unit testing framework for Java that was created around 2000 and
+	  standardized TDD
+	- it includes many annotations and classes to write automated unit tests
+	- test classes go into packages in the src/test/java in your maven project
+		- you name the package and class based on what you are testing. for
+		  example, if you are testing a Service that is in com.bofa.services
+		  in src/main/java, then you would create com.bofa.services in
+		  src/test/java and put ServiceTest class in there
+	- annotations:
+		- @BeforeAll: over a method that runs ONCE before any tests execute
+		- @BeforeEach: over a method that runs before each test
+		- @AfterEach: over a method that runs after each test
+		- @AfterAll: vover a method that runs ONCE after all tests have executed
+		- @Test: over a method that should be run as a test (pass/fail)
+		- @DisplayName: allows you to give a test a display name (otherwise
+			by default it will just use the method name)
+		- @TestMethodOrder(): goes over the test class and allows you to set
+			up an order for the tests to run (they are not consistently
+			ordered otherwise), some parameters are OrderAnnotation.class
+			and Alphanumeric.class
+		- @Order(1): goes with the above annotation if the parameter was
+			OrderAnnotation.class
+	- assertions
+		- assertions are what you use to determine whether the test passes or fails
+		- they make sure (or assert) that something is what it should be
+		- in JUnit 5, we can use import static org.junit.jupiter.api.Assertions.*;
+		  to make it easier to access these assertion methods in our test class
+			- otherwise, you can just type Assertions.assertMethod because
+			  they are static methods on the Assertions class
+		- common methods
+			- assertEquals(expectedValue, actualValue)
+				- for example: assertEquals(10, myObj.add(5, 5));
+			- assertTrue(actualValue)
+				- for example: assertTrue(myObj.isPerson);
+			- assertFalse(actualValue)
+			- assertArrayEquals(expectedArray, actualArray)
+			- assertThrows(expectedException, executable)
+				- this one requires a lambda which we'll talk about
+				  on thursday (day 4 notes) for the "executable" parameter
+		- these methods represent what you are actually testing; they will
+		  throw an exception if the assertion is not met (therefore, a JUnit
+		  test fails when an exception is thrown UNLESS you are expecting that
+		  exception in an assertThrows or if it is caught in a try-catch)
