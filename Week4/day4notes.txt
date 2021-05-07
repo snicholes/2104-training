@@ -1,0 +1,41 @@
+Hibernate
+	- an ORM framework for Java
+		ORM: object-relational mapper; a solution for the object-relational mismatch.
+		     maps data stored relationally in a RDB to an object-oriented structure.
+	- object-relational mismatch:
+		data stored in a database is in a very different structure from Java objects.
+		for example, a Cat is one class in Java that features "has-a" relationships
+		with Breed, Status, and Set<SpecialNeed>. however, in the database, the Cat
+		data is stored in cat, status, breed, special_need, cat_special_need tables.
+		to get a full cat object, you need complicated SELECT statements in order to
+		retrieve all of the necessary data from those tables. an ORM handles creating
+		those statements for you so that instead of writing complex statements, you
+		use mapping to describe the relationships.
+	- written by Gavin King in 2002
+		first, he wrote Hibernate, then Oracle took him on to write the JPA
+		JPA: Java Persistence API; interfaces meant for mapping/managing relational data with objects
+		after he wrote the JPA, he rewrote Hibernate to implement it
+	- JPA: almost all of the annotations and interfaces used are from the JPA,
+	  i.e. javax.persistence, and Hibernate just is the implementations of those
+	  interfaces so that you can actually use them.
+	- used to be xml-based, now is annotation-based
+		it is still possible to map your beans using xml, but it is not standard
+			annotations are easier to use because they go directly within the bean;
+			no need to go back and forth referencing files. because of this, they are
+			also more readable and more maintainable.
+	- hibernate.cfg.xml: the Hibernate configuration file
+		in src/main/resources
+		important info/metadata that goes in this file (and sets up the SessionFactory):
+			- database connection info (info that would previously go in database.properties)
+			- hibernate setup (SQL dialect, SQL comments, DDL-auto)
+			- object mappings (either references to the annotated classes or to hbm.xml files)
+	- mapping
+		- with xml, <mapping resource="BeanName.hbm.xml></mapping> in hibernate.cfg.xml
+		- with annotations, <mapping class="com.revature.beans.BeanName"></mapping> in hibernate.cfg.xml
+		example of xml mapping: BeanName.hbm.xml
+			<hibernate-mapping>
+				<class name="com.revature.beans.BeanName" table="bean_name">
+					<id name="beanId" column="bean_id"><generator class="increment"/></id>
+					<property name="beanField" column="bean_column"></property>
+				</class>
+			</hibernate-mapping>

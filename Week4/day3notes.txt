@@ -1,0 +1,97 @@
+SQL cont'd
+	scalar functions: single output from a single input
+		- length(string), upper(string), lower(string), substr(string, start, end), concat(string, string)
+		- example: SELECT CONCAT(firstname, lastname) FROM PERSON;
+		- the result set includes as many rows as the amount that you put in
+	aggregate functions: single output from group of inputs
+		- avg(column), sum(column), count(column), max(column), min(column)
+		- example: SELECT COUNT(cat_id) FROM PERSON_CAT WHERE PERSON_ID = 3;
+		- example: SELECT AVG(price) FROM TRACK;
+		- the result set includes one row/output regardless of how many rows you put in
+		- GROUP BY: used with aggregate functions for data analysis
+			- e.g. SELECT col1, COUNT(col2) FROM table GROUP BY
+			  col1;
+		- HAVING: used with aggregate functions for data analysis
+			- e.g. SELECT COUNT(col1) FROM table GROUP BY col1
+			  HAVING col2 = value;
+	- joins
+		- joins are used to query data from multiple tables at the
+		  same time.
+		- types of joins:
+			- inner join: only returns the rows that have a
+			  match
+			- left outer join: returns all rows from the left
+			  table, with nulls in the right-side rows that
+			  don't have matches.
+			- right outer join: returns all rows from the right
+			  table, with nulls in the left-side rows that don't
+			  have matches.
+			- full outer join: returns all rows from both tables
+			  with nulls in rows on either side where matches
+			  do not exist.
+			- cross join: the Cartesian product of all of the
+			  rows from both tables; i.e. all possible combinations
+			  of rows from both tables. the result sets of these
+			  can obviously get very large, so only use when
+			  necessary.
+			- self join: joining a table with itself in order to
+			  combine related data from the same table. a great
+			  example of this is when an EMPLOYEE table has a
+			  foreign key referencing that employee's manager
+			  who is also an employee and therefore also in the
+			  EMPLOYEE table.
+		- examples: SELECT * FROM TABLE_A JOIN TABLE_B ON A = B;
+		  SELECT * FROM TABLE_A JOIN TABLE_B USING ID;
+		  SELECT * FROM TABLE_A LEFT OUTER JOIN TABLE_B ON A = B;
+		- the JOIN keyword alone performs an inner join.
+		- if we have to use JOINs anyway, what is the point of
+		  designating certain fields as foreign keys?
+			- a foreign key is a type of constraint, meaning
+			  that it restricts certain DML from being executed
+			  if the result does not fulfill the constraint. if
+			  you try to add a row but the value for the foreign
+			  key column does not reference any row in the table
+			  that it is referencing, the database will not
+			  allow you to perform that insert. if you try to
+			  delete a row that is being referenced by a foreign
+			  key in another table, it will not let you perform
+			  that delete, and so on.
+			- TL;DR: foreign keys enforce referential integrity.
+	- aliases
+		- an alias is like a "label"
+		- they can be used to reference a certain result set or table in a query
+		- they can also be used to set the name of a column in a result set
+		- SELECT NAME AS 'Track Name' FROM TRACK B WHERE B.TRACK_ID = 4;
+			- setting the alias 'Track Name' to be the new name of the NAME column in the result set
+			- setting the alias B to reference the track table
+		- they are useful for making complicated queries easier to read, reducing ambiguity of names
+	- schema
+		- a schema is just a way of describing a group of tables that go together
+		- usually this is a group of tables for a certain application, i.e. CatApp
+		- a schema is also a way of talking about the structure/relationships
+		  of your tables: for example, if someone says "show me your database
+		  schema," what they want to see is probably your DDL or a diagram (ERD,
+		  entity relationship diagram) that shows your tables and how they
+		  relate to each other.
+	database normalization (overview)
+	- the purpose of database normalization is to decrease data
+	  redundancy and increase data integrity. it is part of E.F.
+	  Codd's relational model.
+	- database normalization makes your database drastically
+	  more maintainable, as small changes do not need to break
+	  everything - things can be inserted and removed fairly
+	  easily.
+	- there are guidelines for normalizing a database, and these
+	  go up in steps as the database becomes more normalized.
+		- in most cases, the goal is to reach 3NF, or "third
+		  normal form."
+	- UNF: unnormalized form
+		- primary keys, no repeating groups
+	- 1NF: first normal form
+		- UNF + atomic columns (only one value in a cell)
+	- 2NF: second normal form
+		- 1NF + no partial dependencies (fields must depend on
+		  the entirety of every candidate key)
+	- 3NF: third normal form
+		- 2NF + no transitive dependencies (fields must only
+		  depend on candidate keys)
