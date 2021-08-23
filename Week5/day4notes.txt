@@ -1,0 +1,42 @@
+JSON marshalling
+	- so far, we have seen our objects in a few different forms:
+		- relational data (SQL)
+		- Java objects/beans
+		- JSON (JavaScript object notation)
+	- in order to map our relational data with our Java objects
+	  and vice versa, we used Hibernate/JPA
+	- we also need to map JSON with Java objects
+		- this is something that could be done manually by
+		  processing the String, but just like with JDBC for
+		  relational data, it's a lot of extra work that is
+		  very repetitive and could be done for us
+		- to do this, we can use libraries that will do that
+		  work for us just like Hibernate did
+	- the libraries we use for this are Jackson
+		- jackson-annotations
+		- jackson-core
+		- jackson-databind
+	- Jackson works seamlessly with Javalin which makes it a
+	  perfect choice
+		- we can simply use the Javalin context object
+		  and get the response body and it will use
+		  Jackson to change that response body into
+		  the object we specify
+		- Cat cat  = ctx.bodyAsClass(Cat.class);
+	- if we were not using Javalin, we could still use Jackson
+		- using it without Javalin (or a similar framework)
+		  means utilising the main Jackson object,
+		  com.fasterxml.jackson.databind.ObjectMapper
+		- ObjectMapper objMap = new ObjectMapper();
+		  Cat cat = (Cat) objMap.readValue(requestObj.getInputStream(),
+			Cat.class);
+		- obviously, this is more gross than with Javalin,
+		  but it is still less gross than turning the InputStream
+		  into a String and then filtering the String to turn this
+		  input: {"id":1, "name":"Fluffy", "age":2, "breed":{"id":1,
+			"name":"Persian"}, "status":{"id":1, "name":
+			"Available"} /* etc */ }
+		  into a Java bean. meaning we'd have to filter out the quotes
+		  and the curly braces and write code to figure out what all
+		  of those things meant and how to get the data from it, etc.
+		  it would be much more work.

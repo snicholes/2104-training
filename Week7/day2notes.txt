@@ -1,0 +1,23 @@
+Fetch API
+	- an API in javascript that allows us to send HTTP requests & receive 
+	  HTTP responses like AJAX
+	- introduced in ES6
+	- takes a little less code than AJAX
+	- fetch function returns a response as a promise
+		- fetch(uri) // sends GET request
+		- fetch(uri, {method: 'PUT', body: JSON.stringify(obj)}); // adding other 
+		  // information for the request
+			- other information can be put in the second parameter 
+			  like headers, etc.
+	- can be used with async/await in functions
+		- introduced in ES7
+		- async is used on a function to specify that it will either 
+		  return a promise or is making asynchronous calls
+		- await can be used in an async function when making asynchronous 
+		  calls to wait for the promise to be resolved
+			- async function sendRequest() {
+				...
+				let response = await fetch(uri);
+				if (response.status === 200)
+					let obj = await response.json();
+			  }

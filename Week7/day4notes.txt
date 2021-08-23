@@ -1,0 +1,26 @@
+Selenium
+	test automation framework, allows developers to write scripts for automating interactions with a front end
+	4 components
+		Selenium IDE: a browser IDE that allows you to record user input & generates scripts from that input
+			- isn't always accurate and doesn't work for all browsers
+		Selenium RC: (remote control) allows Selenium to connect & run scripts remotely
+			- somewhat more outdated because it is more complicated (relies on proxy server, etc.)
+		Selenium WebDriver: engine for automating web applications
+			- different implementations are available for different browsers (ChromeDriver, GeckoDriver, etc.)
+		Selenium Grid: allows scripts to run concurrently in different browsers to gauge compatibility/performance
+	setup
+		- selenium & webdriver implementation dependencies in pom.xml
+		- put the driver implementation in src/test/resources
+	Selenium classes/interfaces
+		- WebDriver/ChromeDriver/etc.
+			- this is your actual driver used to interact with the browser/page
+			- driver.get("http://localhost:4200")
+			- driver.close() closes the current browser window, stops driver if it was the last window open
+			- driver.quit() closes the driver & all open windows
+		- WebElement
+			- represents elements on the page
+			- different ways of finding these elements (driver.findElement(By...))
+				- id
+				- cssSelector
+				- tagName
+				- xpath

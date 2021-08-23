@@ -1,0 +1,48 @@
+JavaScript cont'd
+	DOM: document object model
+		- represents all of the HTML elements in a page in a tree structure
+		- this can be thought of like "the compiled HTML" or "the HTML that is actually shown"
+			- but HTML isn't compiled - just a comparison
+		- the DOM is where you can get elements from in JavaScript to do things with them
+			- the DOM object in JavaScript is called document
+	DOM selection
+		- selecting an element from the DOM can be done in several ways
+		- the easiest way is to get an element by id because IDs are meant to be unique
+			- note that HTML does not actually enforce this - you can have duplicate IDs
+			  but if you do, you will only get the first one when you get it from JavaScript
+			- let element = document.getElementById("idName");
+		- you can also get elements by classname, tagname, etc. this will get an array of all
+		  elements with that class or tag name
+			- let elements = document.getElementsByClassName("className");
+			  elements[0].style = 'color:blue';
+	DOM manipulation
+		- once you have selected elements, you can set their properties
+		- you also can create and remove elements from JavaScript
+		- there are multiple ways of creating elements
+			- you can simply write the HTML for one in the innerHTML of its parent element
+				- element.innerHTML = '<p>This element is new</p>';
+			- but you can also create elements dynamically with specific functions
+				- let p = document.createElement('p');
+				  p.innerHTML = 'This element is new';
+				  p.style = 'color:blue';
+				  p.class = 'className';
+				  parentElement.appendChild(p);
+				- this is the preferred way of creating elements because it gives
+				  more flexibility
+	events
+		- events in the DOM are things like clicks, mouse overs, highlights, etc.
+		- basically if the user does anything at all while the page is open, it is probably
+		  a type of event
+	event listeners
+		these are listeners that wait for certain events to happen, and then execute certain functions when they happen
+		document.getElementById("idName").onclick = funcName; // we don't include parentheses/params with the function because that would just call it immediately
+			- JS passes in an "event" object implicitly as a parameter
+				- this means that we can get info about the event inside of the
+				  function that we set up to happen
+				- so if the click event happens, then inside of the funcName function
+				  we can use the "event" object to get more info
+					- for example, event.target will return the element
+					  that the event happened on (so the element that was clicked)
+		document.getElementById("idName").addEventListener("keydown", checkIfEnter, false);
+			- this is the more "functional" and preferred way of setting event listeners
+	

@@ -1,0 +1,6 @@
+Selenium cont'd
+	POM (page object model) design pattern
+		- separates the information about the webelements into a different class
+		- allows using these elements to be more clear, self-descriptive, etc.
+		- easier to use for interacting with a page, especially if you interact with certain elements more than once
+		- passing in the driver into the constructor so that it can be used throughout the POM

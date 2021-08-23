@@ -1,0 +1,37 @@
+Javalin
+	- a lightweight framework for Java and Kotlin
+	- abstracts away Servlets
+	- runs on an embedded Jetty server
+	- heavy use of lambdas
+	- setup:
+		- javalin, slf4j, and jackson dependencies
+		- in main method:
+			Javalin app = Javalin.create();
+			Javalin app = Javalin.create(config -> {});
+			app.start(8080); // port number
+		- HTTP handlers:
+			app.get("path", (ctx) -> { //handling });
+			app.post("path", (ctx) -> {});
+			app.before("path", (ctx) -> {});
+			app.after("path", (ctx) -> {});
+		- shortcut to setting up paths: app.routes() sets up a
+		  static instance so that you can call get, post, etc.
+			app.routes(() -> {
+				path("cats", () -> {
+					get(CatController::getCats);
+					post(CatController::addCat);
+				});
+			});
+		- handler methods should take Context object as param
+			- in the lambda implementations, ctx is this object
+			- in the .routes() method specifications, the method
+			  itself is used as the implementation, so those
+			  methods need to have a Context parameter
+		- Context ctx methods
+			- see documentation javalin.io/documentation#context
+			- abstraction of HttpServletRequest and
+			  HttpServletResponse objects, so you can access
+			  the HTTP request to get information like path,
+			  path parameters, query parameters, request body,
+			  etc. and then write to the HTTP response with
+			  the response body, status code, etc.
